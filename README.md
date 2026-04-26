@@ -1,6 +1,6 @@
 # Image Compression for Resource-Constrained Devices
 
-> **CPE2206: Analysis and Design of Algorithms**  
+> **CPE2206 — Analysis and Design of Algorithms**  
 > Soroti University · School of Engineering and Technology  
 > Department of Electronics and Computer Engineering
 
@@ -38,28 +38,10 @@ Three algorithms were implemented and evaluated:
 ```
 Group5-ADA-Capstone-Project/
 │
-├── src/
-│   ├── rle.c               # Run-Length Encoding — compress & decompress
-│   ├── rle.h
-│   ├── huffman.c           # Huffman Coding — tree build, encode, decode
-│   ├── huffman.h
-│   ├── hybrid.c            # Hybrid selector — picks best method per block
-│   ├── hybrid.h
-│   └── main.c              # Entry point — processes all 4,800 image blocks
-│
-├── tests/
-│   ├── block_uniform.bin   # Test block: uniform pixel values
-│   ├── block_mixed.bin     # Test block: mixed pixel values
-│   └── block_varied.bin    # Test block: all unique pixel values
-│
-├── report/
-│   ├── group5_capstone_report.tex   # Full LaTeX source
-│   └── group5_capstone_report.pdf   # Compiled report
-│
-├── results/
-│   └── compression_results.txt      # Output ratios from test runs
-│
-├── Makefile
+├── week4_rle_compression.c   # Week 4: Run-Length Encoding — compress & decompress
+├── week6_huffman.c           # Week 6: Huffman Coding — tree build, encode, decode
+├── week7_hybrid.c            # Week 7: Hybrid selector — picks best method per block
+├── .gitignore
 └── README.md
 ```
 
@@ -87,15 +69,15 @@ Output compressed image + compression ratio
 
 ### Compression Methods
 
-**RLE** replaces runs of repeated pixels with `(value, count)` pairs:
+**RLE** (`week4_rle_compression.c`) replaces runs of repeated pixels with `(value, count)` pairs:
 ```
 Input:  255 255 255 255 100 100 50
 Output: (255,4) (100,2) (50,1)       <- 6 bytes instead of 7
 ```
 
-**Huffman Coding** assigns shorter binary codes to more frequent pixel values, achieving entropy-optimal compression regardless of run structure.
+**Huffman Coding** (`week6_huffman.c`) assigns shorter binary codes to more frequent pixel values, achieving entropy-optimal compression regardless of run structure.
 
-**Hybrid** runs both algorithms on each block and keeps whichever result is smaller — guaranteeing no block ever expands.
+**Hybrid** (`week7_hybrid.c`) runs both algorithms on each block and keeps whichever result is smaller — guaranteeing no block ever expands.
 
 ---
 
@@ -116,32 +98,26 @@ The hybrid approach **never expands** a block, making it the safest choice for e
 ### Prerequisites
 
 - GCC (or any C99-compatible compiler)
-- Make
 
-### Compile
-
-```bash
-make
-```
-
-Or manually:
+### Compile each file individually
 
 ```bash
-gcc -O2 -Wall -o compress src/main.c src/rle.c src/huffman.c src/hybrid.c
+# Week 4 — RLE
+gcc -O2 -Wall -o rle week4_rle_compression.c
+
+# Week 6 — Huffman
+gcc -O2 -Wall -o huffman week6_huffman.c
+
+# Week 7 — Hybrid
+gcc -O2 -Wall -o hybrid week7_hybrid.c
 ```
 
 ### Run
 
 ```bash
-./compress <input_image.raw> <output_compressed.bin>
-```
-
-> **Note:** Input must be a raw grayscale binary file, 307,200 bytes (640 x 480 x 1).
-
-### Run Tests
-
-```bash
-make test
+./rle
+./huffman
+./hybrid
 ```
 
 ---
