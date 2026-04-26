@@ -1,6 +1,6 @@
 # Image Compression for Resource-Constrained Devices
 
-> **CPE2206 — Analysis and Design of Algorithms**  
+> **CPE2206: Analysis and Design of Algorithms**  
 > Soroti University · School of Engineering and Technology  
 > Department of Electronics and Computer Engineering
 
@@ -22,7 +22,7 @@ Three algorithms were implemented and evaluated:
 
 ---
 
-## Group 5 — Team Members
+## Group 5:  Team Members
 
 | Name | Student Number |
 |------|----------------|
